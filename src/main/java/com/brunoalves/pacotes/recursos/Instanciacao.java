@@ -1,4 +1,4 @@
-package com.brunoalves.pacotes.recurso;
+package com.brunoalves.pacotes.recursos;
 
 import java.math.BigDecimal;
 import java.text.ParseException;

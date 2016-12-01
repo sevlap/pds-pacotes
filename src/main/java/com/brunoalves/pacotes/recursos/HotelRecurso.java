@@ -1,4 +1,4 @@
-package com.brunoalves.pacotes.recurso;
+package com.brunoalves.pacotes.recursos;
 
 
 import java.net.URI;
@@ -14,37 +14,37 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.brunoalves.pacotes.dominio.Passeio;
-import com.brunoalves.pacotes.servico.PasseioServico;
+import com.brunoalves.pacotes.dominio.Hotel;
+import com.brunoalves.pacotes.servico.HotelServico;
 
 
 @RestController
-@RequestMapping("/passeios")
-public class PasseioRecurso {
+@RequestMapping("/hoteis")
+public class HotelRecurso {
 
 
 	@Autowired
-	private PasseioServico as;
+	private HotelServico as;
 
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Passeio>> todos() {
-		List<Passeio> lista = as.buscarTodosOrdenadosPorNome();
+	public ResponseEntity<List<Hotel>> todos() {
+		List<Hotel> lista = as.buscarTodosOrdenadosPorNome();
 		return ResponseEntity.status(HttpStatus.OK).body(lista);
 	}
 
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable("id") Integer id) {
-		Passeio pss = as.buscar(id);
-		return ResponseEntity.status(HttpStatus.OK).body(pss);
+		Hotel hot = as.buscar(id);
+		return ResponseEntity.status(HttpStatus.OK).body(hot);
 	}
 
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> criar(@RequestBody Passeio passeio) {
-		passeio = as.inserir(passeio);
-		URI uri = getUri("/{id}", passeio.getCodPasseio());
+	public ResponseEntity<Void> criar(@RequestBody Hotel hotel) {
+		hotel = as.inserir(hotel);
+		URI uri = getUri("/{id}", hotel.getCodHotel());
 		return ResponseEntity.created(uri).build();
 	}
 	
@@ -55,9 +55,9 @@ public class PasseioRecurso {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> atualizar(@RequestBody Passeio passeio, @PathVariable("id") Integer id) {
-		passeio.setCodPasseio(id);
-		passeio = as.atualizar(passeio);
+	public ResponseEntity<Void> atualizar(@RequestBody Hotel hotel, @PathVariable("id") Integer id) {
+		hotel.setCodHotel(id);
+		hotel = as.atualizar(hotel);
 		return ResponseEntity.noContent().build();
 	}
 	
